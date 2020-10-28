@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import MarkdownBoard from "./Markdown_Board";
-import Previewer from "./Previewer"
+import marked from "marked"
 import './App.css';
 
 class App extends Component {
@@ -11,6 +11,7 @@ class App extends Component {
     }
   }
 
+
   GetInputValue = (data) => {
     this.setState({
       markup: data
@@ -19,13 +20,14 @@ class App extends Component {
 
 
   render() {
+    console.log(marked(this.state.markup));
     return (
       <div className="App" >
-        <h1>Markdown previewer</h1>
-        <div>
-          <MarkdownBoard getInputValue={this.GetInputValue} />
-          <hr />
-          <Previewer collectedData={this.state.markup} />
+        <h1 >Markdown previewer</h1>
+        <div className="board">
+          <MarkdownBoard getInputValue={this.GetInputValue} markup={this.state.markup} />
+          <img id="image" src="https://raw.githubusercontent.com/dcurtis/markdown-mark/master/png/208x128-solid.png" alt="markdown-img" />
+          <div className="previewer" dangerouslySetInnerHTML={{ __html: marked(this.state.markup, { gfm: true, breaks: true }) }} />
         </div>
       </div>
     );

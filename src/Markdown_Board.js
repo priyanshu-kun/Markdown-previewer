@@ -8,7 +8,7 @@ class MarkdownBoard extends Component {
     render() {
         return (
             <form>
-                <textarea onChange={this.handleChange} type="text" name="textarea" id="textarea" ></textarea>
+                <textarea onChange={this.handleChange} type="text" name="textarea" placeholder="Please enter your markdown here..." value={this.props.markup} ></textarea>
             </form>
         )
     }
